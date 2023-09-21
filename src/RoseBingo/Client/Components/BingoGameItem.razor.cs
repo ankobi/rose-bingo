@@ -1,11 +1,18 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MudBlazor;
+using RoseBingo.Client.Utils;
 
 namespace RoseBingo.Client.Components
 {
     public partial class BingoGameItem
     {
-        private const string height = "120px";
-        private const string progressColor = "#FFEB3B";
+        private const string height = "200px";
+        private const string progressColorLight = "#FFEB3B";
+        private const string progressColorDark = "#FF4400";
+        private const string backgroundColorDark = "#373740";
+
+        [Inject]
+        private IThemeService? ThemeService { get; set; }
 
         [Parameter]
         public string Value { get; set; } = string.Empty;
@@ -21,12 +28,20 @@ namespace RoseBingo.Client.Components
 
         private string GetStyle()
         {
+            var backgroundColor = "white";
+            var progressColor = progressColorLight;
+            if (ThemeService?.IsDarkMode ?? false)
+            {
+                backgroundColor = backgroundColorDark;
+                progressColor = progressColorDark;
+            }
+
             string style = $"height:{height};text-align:center;";
 
             if (Amount >  1 && Counter > 0)
             {
                 int currentProgress = 100 / Amount * Counter;
-                style += $";background: linear-gradient(to right, {progressColor} 0%,{progressColor} {currentProgress}%,white {currentProgress + 1}%,white 100%)";
+                style += $";background: linear-gradient(to right, {progressColor} 0%,{progressColor} {currentProgress}%,{backgroundColor} {currentProgress + 1}%,{backgroundColor} 100%)";
             }
             else
             {
@@ -36,6 +51,32 @@ namespace RoseBingo.Client.Components
                 }
             }
             return style;
+        }
+
+        private string GetTextStyle()
+        {
+            if (Value.Length <= 10)
+            {
+                return "font-size: xxx-large";
+            }
+            else
+            {
+                if (Value.Length <= 30)
+                {
+                    return "font-size: xx-large";
+                }
+                else
+                {
+                    if (Value.Length <= 60)
+                    {
+                        return "font-size: x-large";
+                    }
+                    else
+                    {
+                        return "font-size: large";
+                    }
+                }
+            }
         }
 
         private async void CountUp()

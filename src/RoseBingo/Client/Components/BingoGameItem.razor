@@ -1,7 +1,7 @@
 ﻿<MudItem xs="2">
-    <MudPaper>
+    <MudPaper style="min-width:200px">
         <div style="@GetStyle()" @onclick=CountUp @oncontextmenu=CountDown @oncontextmenu:preventDefault="true">
-            <MudText Typo="Typo.h6">@Value</MudText>
+            <MudText style="@GetTextStyle()">@Value</MudText>
         </div>
     </MudPaper>
 </MudItem>

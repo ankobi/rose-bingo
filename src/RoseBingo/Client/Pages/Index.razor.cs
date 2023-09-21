@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using RoseBingo.Client.Utils;
-using System.Text;
 
 namespace RoseBingo.Client.Pages
 {

@@ -1,15 +1,18 @@
-﻿@inherits LayoutComponentBase
+﻿@using RoseBingo.Client.Utils;
+@inherits LayoutComponentBase
+@inject IThemeService ThemeService
 
 <MudDialogProvider />
 <MudSnackbarProvider />
-<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
-<MudSwitch @bind-Checked="@_isDarkMode" Color="Color.Primary" Class="ma-4" T="bool" Label="Toggle Light/Dark Mode" />
+<MudThemeProvider @bind-IsDarkMode="@ThemeService.IsDarkMode" Theme="ThemeService.Theme" />
+<MudSwitch @bind-Checked="@ThemeService.IsDarkMode" Color="Color.Primary" Class="ma-4" T="bool" Label="Toggle Light/Dark Mode" />
 
 <MudLayout>
     <MudAppBar Elevation="1">
         <MudText Typo="Typo.h5" Class="ml-3">Rose Bingo</MudText>
         <MudSpacer />
         <MudImage Src="img/logo.png" Height="64" />
+        <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Edge="Edge.End" Href="https://github.com/ankobi/rose-bingo" target="_blank" />
         <MudIconButton Icon="@Icons.Material.Filled.DarkMode" Color="Color.Inherit" Edge="Edge.End" OnClick="ToggleDarkMode" />
     </MudAppBar>
     <MudMainContent>
@@ -18,23 +21,8 @@
 </MudLayout>
 
 @code{
-    private bool _isDarkMode;
-    private MudTheme _theme = new MudTheme()
-        {
-            Palette = new PaletteLight()
-            {
-                Background = Colors.Grey.Lighten5,
-                Primary = "#FF4400",
-                AppbarBackground = "#FF4400"
-            },
-            PaletteDark = new PaletteDark()
-            {
-                Background = Colors.Amber.Accent4
-            }
-        };
-
     private void ToggleDarkMode()
     {
-        _isDarkMode = !_isDarkMode;
+        ThemeService.IsDarkMode = !ThemeService.IsDarkMode;
     }
 }
