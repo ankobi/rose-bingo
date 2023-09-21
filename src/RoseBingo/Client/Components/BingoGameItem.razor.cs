@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 
 namespace RoseBingo.Client.Components
 {
@@ -16,6 +15,9 @@ namespace RoseBingo.Client.Components
 
         [Parameter]
         public int Counter { get; set; } = 1;
+
+        [Parameter]
+        public EventCallback<int> CounterChanged { get; set; }
 
         private string GetStyle()
         {
@@ -36,19 +38,21 @@ namespace RoseBingo.Client.Components
             return style;
         }
 
-        private void CountUp()
+        private async void CountUp()
         {
             if (Counter < Amount)
             {
                 Counter++;
+                await CounterChanged.InvokeAsync(Counter);
             }
         }
 
-        private void CountDown()
+        private async void CountDown()
         {
             if (Counter > 0) 
             {
                 Counter--;
+                await CounterChanged.InvokeAsync(Counter);
             }
         }
     }

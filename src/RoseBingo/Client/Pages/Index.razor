@@ -1,4 +1,5 @@
 ﻿@page "/"
+@page "/edit/{Data}"
 
 <PageTitle>Index</PageTitle>
 
@@ -193,9 +194,5 @@
 <MudGrid Spacing="1" Justify="Justify.Center">
     <MudItem xs="12">
         <MudButton OnClick="GenerateLink" Class="ma-3" Variant="Variant.Filled" Color="Color.Primary">Bingo erstellen</MudButton>
-        @if (!string.IsNullOrEmpty(_link))
-        {
-            <MudLink Href="@_link">Bingo!</MudLink>
-        }
     </MudItem>
 </MudGrid>

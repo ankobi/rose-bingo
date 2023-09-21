@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Text;
-using System.Windows.Markup;
+using RoseBingo.Client.Utils;
 
 namespace RoseBingo.Client.Pages
 {
     public partial class Bingo
     {
+        [Inject]
+        private NavigationManager? NavManager { get; set; }
+
         [Parameter]
         public string Data { get; set; } = string.Empty;
 
@@ -99,101 +101,57 @@ namespace RoseBingo.Client.Pages
         private int counterO4 = 0;
         private int counterO5 = 0;
 
-        private List<string> values = new();
-        private List<int> amounts = new();
+        private List<string> originalValues = new();
+        private List<int> originalAmounts = new();
+
+        private List<string> currentValues = new();
+        private List<int> currentAmounts = new();
 
         private Random random = new Random();
         private bool isValid;
 
         protected override void OnInitialized()
         {
-            isValid = CheckData();
-        }
-
-        private bool CheckData()
-        {
-            if (!string.IsNullOrWhiteSpace(Data) && Decode(Data, out var decodedData))
+            isValid = ParamHelper.CheckData(Data, out originalValues, out originalAmounts);
+            if (isValid )
             {
-                var parameters = decodedData.Split(';');
-                values = new();
-                amounts = new();
-
-                // Should be 5*5 parameters for Bingo
-                if (parameters.Length == 25)
-                {
-                    
-
-                    foreach (var parameter in parameters)
-                    {
-                        // Each parameter has two properties, text and amount
-                        var parts = parameter.Split(':');
-                        if (parts.Length == 2) 
-                        {
-                            // Again each part is encoded in base64
-                            if (Decode(parts[0], out var value) && Decode(parts[1], out var amountText) && int.TryParse(amountText, out var amount))
-                            {
-                                values.Add(value);
-                                amounts.Add(amount);
-                            }
-                            else
-                            {
-                                // Directly stop processing, one entry could not be decoded
-                                break;
-                            }
-                        }
-                    }
-
-                    if (values.Count == 25 && amounts.Count == 25)
-                    {
-                        // Everything fine, we can go on
-                        SetValues(values, amounts);
-                        return true;
-                    }
-                }
+                SetValues(originalValues, originalAmounts);
             }
-            return false;
-        }
-
-        private bool Decode(string text, out string decodedString)
-        {
-            decodedString = string.Empty;
-
-            try
-            {
-                decodedString = Encoding.UTF8.GetString(Convert.FromBase64String(text));
-                return true;
-            }
-            catch
-            {
-                // Catch all errors, in that case we will just return false
-            }
-
-            return false;
         }
 
         private void Reset()
         {
             // Reset to original values and amounts
-            SetValues(values, amounts);
+            SetValues(originalValues, originalAmounts);
+        }
+
+        private void Edit()
+        {
+            if (NavManager != null)
+            {
+                var currentLink = NavManager.Uri;
+                currentLink = currentLink.Replace("bingo", "edit");
+                NavManager.NavigateTo(currentLink);
+            }
         }
 
         private void Shuffle(bool skipCenter)
         {
-            var valuesCopy = values.ToList();
-            var amountsCopy = amounts.ToList();
+            var valuesCopy = currentValues.ToList();
+            var amountsCopy = currentAmounts.ToList();
             var counters = new List<int>
             {
                 counterB1,counterI1,counterN1,counterG1,counterO1,
                 counterB2,counterI2,counterN2,counterG2,counterO2,
                 counterB3,counterI3,counterN3,counterG3,counterO3,
                 counterB4,counterI4,counterN4,counterG4,counterO4,
-                counterB5,counterI5,counterN5,counterG5,counterO5,
+                counterB5,counterI5,counterN5,counterG5,counterO5
             };
 
             for (int i = 0; i < 100; i++)
             {
-                int index1 = random.Next(0, values.Count);
-                int index2 = random.Next(0, values.Count);
+                int index1 = random.Next(0, valuesCopy.Count);
+                int index2 = random.Next(0, valuesCopy.Count);
 
                 if ((index1 == 12 || index2 == 12) && skipCenter)
                 {
@@ -310,6 +268,9 @@ namespace RoseBingo.Client.Pages
             counterN5 = newCounters != null ? newCounters[22] : 0;
             counterG5 = newCounters != null ? newCounters[23] : 0;
             counterO5 = newCounters != null ? newCounters[24] : 0;
+
+            currentValues = newValues;
+            currentAmounts = newAmounts;
         }
     }
 }
