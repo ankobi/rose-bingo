@@ -14,7 +14,7 @@ jobs:
       - uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '7.0.x'
-      - run: dotnet publish –configuration Release
+      - run: dotnet publish src/RoseBingo/Client/RoseBingo.Client.csproj -c Release
       - run: sed -i 's/<base href="\/" \/>/<base href="\/${{ env.REPO_NAME }}\/" \/>/g' $GITHUB_WORKSPACE/$PUBLISH_FOLDER/index.html
       - run: cp $GITHUB_WORKSPACE/$PUBLISH_FOLDER/index.html $GITHUB_WORKSPACE/$PUBLISH_FOLDER/404.html
       - run: touch $PUBLISH_FOLDER/.nojekyll
