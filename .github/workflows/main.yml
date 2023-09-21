@@ -19,13 +19,6 @@ jobs:
       - run: cp $GITHUB_WORKSPACE/$PUBLISH_FOLDER/index.html $GITHUB_WORKSPACE/$PUBLISH_FOLDER/404.html
       - run: touch $PUBLISH_FOLDER/.nojekyll
       - if: ${{ github.ref == 'refs/heads/main' }}
-        uses: peaceiris/actions-gh-pages@v3
+        uses: actions/deploy-pages@v1.2.9
         with:
-            github_token: ${{ secrets.GITHUB_TOKEN  }}
-            publish_branch: gh-pages
-            publish_dir: /${{ env.PUBLISH_FOLDER }}
-            allow_empty_commit: false
-            keep_files: false
-            force_orphan: true
-
-            
+            folder: /${{ env.PUBLISH_FOLDER }}
