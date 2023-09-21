@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoseBingo.Server", "RoseBingo\Server\RoseBingo.Server.csproj", "{9DE03AB6-7CBF-4B8B-A7C1-AEE36E3AE873}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoseBingo.Client", "RoseBingo\Client\RoseBingo.Client.csproj", "{57F7703F-3F19-4EA7-96AE-140C99DAC5C5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9DE03AB6-7CBF-4B8B-A7C1-AEE36E3AE873}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DE03AB6-7CBF-4B8B-A7C1-AEE36E3AE873}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DE03AB6-7CBF-4B8B-A7C1-AEE36E3AE873}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DE03AB6-7CBF-4B8B-A7C1-AEE36E3AE873}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57F7703F-3F19-4EA7-96AE-140C99DAC5C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57F7703F-3F19-4EA7-96AE-140C99DAC5C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57F7703F-3F19-4EA7-96AE-140C99DAC5C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57F7703F-3F19-4EA7-96AE-140C99DAC5C5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B38B20B8-384F-4152-A9D1-381EFBD74DAD}
+	EndGlobalSection
+EndGlobal

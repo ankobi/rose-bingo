@@ -1,0 +1,82 @@
+﻿@page "/bingo/{Data}"
+@using RoseBingo.Client.Components
+
+<PageTitle>Bingo</PageTitle>
+
+@if (!isValid)
+{
+    <MudAlert Severity="Severity.Error">Fehlerhafter Link!</MudAlert>
+}
+else
+{
+    <MudGrid Spacing="1" Justify="Justify.Center">
+        <MudItem xs="2">
+            <MudText Align="Align.Center" Typo="Typo.h4">B</MudText>
+        </MudItem>
+        <MudItem xs="2">
+            <MudText Align="Align.Center" Typo="Typo.h4">I</MudText>
+        </MudItem>
+        <MudItem xs="2">
+            <MudText Align="Align.Center" Typo="Typo.h4">N</MudText>
+        </MudItem>
+        <MudItem xs="2">
+            <MudText Align="Align.Center" Typo="Typo.h4">G</MudText>
+        </MudItem>
+        <MudItem xs="2">
+            <MudText Align="Align.Center" Typo="Typo.h4">O</MudText>
+        </MudItem>
+    </MudGrid>
+
+    <!-- 1 -->
+    <MudGrid Spacing="1" Justify="Justify.Center">
+        <BingoGameItem Value="@valueB1" Amount="@amountB1" Counter="@counterB1"/>
+        <BingoGameItem Value="@valueI1" Amount="@amountI1" Counter="@counterI1"/>
+        <BingoGameItem Value="@valueN1" Amount="@amountN1" Counter="@counterN1" />
+        <BingoGameItem Value="@valueG1" Amount="@amountG1" Counter="@counterG1" />
+        <BingoGameItem Value="@valueO1" Amount="@amountO1" Counter="@counterO1" />
+    </MudGrid>
+
+    <!-- 2 -->
+    <MudGrid Spacing="1" Justify="Justify.Center">
+        <BingoGameItem Value="@valueB2" Amount="@amountB2" Counter="@counterB2"/>
+        <BingoGameItem Value="@valueI2" Amount="@amountI2" Counter="@counterI2"/>
+        <BingoGameItem Value="@valueN2" Amount="@amountN2" Counter="@counterN2"/>
+        <BingoGameItem Value="@valueG2" Amount="@amountG2" Counter="@counterG2"/>
+        <BingoGameItem Value="@valueO2" Amount="@amountO2" Counter="@counterO2"/>
+    </MudGrid>
+
+    <!-- 3 -->
+    <MudGrid Spacing="1" Justify="Justify.Center">
+        <BingoGameItem Value="@valueB3" Amount="@amountB3" Counter="@counterB3"/>
+        <BingoGameItem Value="@valueI3" Amount="@amountI3" Counter="@counterI3"/>
+        <BingoGameItem Value="@valueN3" Amount="@amountN3" Counter="@counterN3"/>
+        <BingoGameItem Value="@valueG3" Amount="@amountG3" Counter="@counterG3"/>
+        <BingoGameItem Value="@valueO3" Amount="@amountO3" Counter="@counterO3"/>
+    </MudGrid>
+
+    <!-- 4 -->
+    <MudGrid Spacing="1" Justify="Justify.Center">
+        <BingoGameItem Value="@valueB4" Amount="@amountB4" Counter="@counterB4"/>
+        <BingoGameItem Value="@valueI4" Amount="@amountI4" Counter="@counterI4"/>
+        <BingoGameItem Value="@valueN4" Amount="@amountN4" Counter="@counterN4"/>
+        <BingoGameItem Value="@valueG4" Amount="@amountG4" Counter="@counterG4"/>
+        <BingoGameItem Value="@valueO4" Amount="@amountO4" Counter="@counterO4"/>
+    </MudGrid>
+
+    <!-- 5 -->
+    <MudGrid Spacing="1" Justify="Justify.Center">
+        <BingoGameItem Value="@valueB5" Amount="@amountB5" Counter="@counterB5"/>
+        <BingoGameItem Value="@valueI5" Amount="@amountI5" Counter="@counterI5"/>
+        <BingoGameItem Value="@valueN5" Amount="@amountN5" Counter="@counterN5"/>
+        <BingoGameItem Value="@valueG5" Amount="@amountG5" Counter="@counterG5"/>
+        <BingoGameItem Value="@valueO5" Amount="@amountO5" Counter="@counterO5"/>
+    </MudGrid>
+
+    <MudGrid Spacing="1" Justify="Justify.Center">
+        <MudItem xs="12" Class="ma-6">
+            <MudButton OnClick="@Reset" StartIcon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" Color="Color.Primary">Reset</MudButton>
+            <MudButton OnClick="() => Shuffle(false)" StartIcon="@Icons.Material.Filled.Sync" Variant="Variant.Outlined" Color="Color.Primary">Shuffle</MudButton>
+            <MudButton OnClick="() => Shuffle(true)" StartIcon="@Icons.Material.Filled.SyncLock" Variant="Variant.Outlined" Color="Color.Primary">Shuffle (ohne Mitte)</MudButton>
+        </MudItem>
+    </MudGrid>
+}

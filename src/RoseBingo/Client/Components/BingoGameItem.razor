@@ -1,0 +1,9 @@
+﻿<MudItem xs="2" >
+    <MudPaper>
+        <div style="@GetStyle()" @onclick=CountUp @oncontextmenu=CountDown @oncontextmenu:preventDefault="true">
+            <span style="display: inline-block;vertical-align: middle;line-height: normal;">
+                @Value
+            </span>
+        </div>
+    </MudPaper>
+</MudItem>
